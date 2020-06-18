@@ -489,9 +489,19 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Ultimaker
-  #define DEFAULT_Kp 22.2
-  #define DEFAULT_Ki 1.08
-  #define DEFAULT_Kd 114
+  //#define DEFAULT_Kp 22.2
+  //#define DEFAULT_Ki 1.08
+  //#define DEFAULT_Kd 114
+
+  // Stock CR-10S Hotend fan 100%
+  //#define  DEFAULT_Kp 20.84
+  //#define  DEFAULT_Ki 1.96
+  //#define  DEFAULT_Kd 55.47
+
+  // My Ender 3 Pro
+  #define  DEFAULT_Kp 33.78
+  #define  DEFAULT_Ki 4.26
+  #define  DEFAULT_Kd 67.02
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -544,7 +554,12 @@
   //#define DEFAULT_bedKi .023
   //#define DEFAULT_bedKd 305.4
 
-  //  Ender-3 Pro
+  // Ender 3 Stock bed tuned for 50C
+  //#define  DEFAULT_bedKp 10.00
+  //#define  DEFAULT_bedKi .023
+  //#define  DEFAULT_bedKd 305.4
+
+  //  My Ender-3 Pro
   #define DEFAULT_bedKp 96.94
   #define DEFAULT_bedKi 17.27
   #define DEFAULT_bedKd 362.64
@@ -671,6 +686,7 @@
 #define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
+// @@@  Maybe this is involved in the Z home going to "SAFE"?
 
 /**
  * Stepper Drivers
@@ -755,6 +771,10 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
+//  Ender 3 Default settings
+//#define DEFAULT_MAX_FEEDRATE          { 500, 500, 5, 25 }
+
+// Settings from the SKR setup guide
 #define DEFAULT_MAX_FEEDRATE          { 500, 500, 20, 60 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
@@ -768,6 +788,11 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
+
+// Ender 3 defaults
+//#define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 1000 }
+
+// Defaults from the SKR guide
 #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
@@ -795,6 +820,13 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
+
+// Ender 3 defaults
+//#define DEFAULT_XJERK                 10.0
+//#define DEFAULT_YJERK                 10.0
+//#define DEFAULT_ZJERK                  0.4
+//#define DEFAULT_EJERK                  5.0
+
 //#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK 10.0
@@ -848,10 +880,10 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-//@@@ #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 // Force the use of the probe for Z-axis homing
-//#define USE_PROBE_FOR_Z_HOMING
+#define USE_PROBE_FOR_Z_HOMING
 
 /**
  * Z_MIN_PROBE_PIN
@@ -985,7 +1017,7 @@
  * Specify a Probe position as { X, Y, Z }
  */
 //  @@@ https://www.thingiverse.com/thing:3003725 doesn't specify a Z offset, try "-1.00" if this doesn't work
-#define NOZZLE_TO_PROBE_OFFSET { -41, -10, -2.60 }
+#define NOZZLE_TO_PROBE_OFFSET { -41, -10, -1.85 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
