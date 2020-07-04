@@ -21,7 +21,7 @@
  */
 #include "../../../../inc/MarlinConfigPre.h"
 
-#if ENABLED(TFT_LITTLE_VGL_UI)
+#if ENABLED(TFT_LVGL_UI)
 
 #include "lv_conf.h"
 #include "draw_ui.h"
@@ -38,6 +38,9 @@
 
 #if ENABLED(POWER_LOSS_RECOVERY)
   #include "../../../../feature/powerloss.h"
+#endif
+#if BOTH(LCD_SET_PROGRESS_MANUALLY, USE_M73_REMAINING_TIME)
+  #include "../../../ultralcd.h"
 #endif
 
 static lv_obj_t * scr;
@@ -305,13 +308,13 @@ void lv_draw_printing(void) {
       lv_label_set_text(labelPause, printing_menu.pause);
     else
       lv_label_set_text(labelPause, printing_menu.resume);
-    lv_obj_align(labelPause, buttonPause, LV_ALIGN_CENTER, 30, 0);
+    lv_obj_align(labelPause, buttonPause, LV_ALIGN_CENTER, 20, 0);
 
     lv_label_set_text(labelStop, printing_menu.stop);
-    lv_obj_align(labelStop, buttonStop, LV_ALIGN_CENTER, 30, 0);
+    lv_obj_align(labelStop, buttonStop, LV_ALIGN_CENTER, 20, 0);
 
     lv_label_set_text(labelOperat, printing_menu.option);
-    lv_obj_align(labelOperat, buttonOperat, LV_ALIGN_CENTER, 30, 0);
+    lv_obj_align(labelOperat, buttonOperat, LV_ALIGN_CENTER, 20, 0);
   }
 
   lv_style_copy(&lv_bar_style_indic, &lv_style_pretty_color);
@@ -364,7 +367,12 @@ void disp_fan_speed() {
 
 void disp_print_time() {
   memset(public_buf_l, 0, sizeof(public_buf_l));
-  sprintf(public_buf_l, "%d%d:%d%d:%d%d", print_time.hours / 10, print_time.hours % 10, print_time.minutes / 10, print_time.minutes % 10, print_time.seconds / 10, print_time.seconds % 10);
+  #if BOTH(LCD_SET_PROGRESS_MANUALLY, USE_M73_REMAINING_TIME)
+    const uint32_t r = ui.get_remaining_time();
+    sprintf(public_buf_l, "%02d:%02d R", r / 3600, (r % 3600) / 60);
+  #else
+    sprintf(public_buf_l, "%d%d:%d%d:%d%d", print_time.hours / 10, print_time.hours % 10, print_time.minutes / 10, print_time.minutes % 10, print_time.seconds / 10, print_time.seconds % 10);
+  #endif
   lv_label_set_text(labelTime, public_buf_l);
 }
 
@@ -432,4 +440,4 @@ void setProBarRate() {
 
 void lv_clear_printing() { lv_obj_del(scr); }
 
-#endif // TFT_LITTLE_VGL_UI
+#endif // TFT_LVGL_UI
