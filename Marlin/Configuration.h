@@ -500,9 +500,9 @@
   //#define  DEFAULT_Kd 55.47
 
   // My Ender 3 Pro
-  #define  DEFAULT_Kp 33.78
-  #define  DEFAULT_Ki 4.26
-  #define  DEFAULT_Kd 67.02
+  #define  DEFAULT_Kp 28.73
+  #define  DEFAULT_Ki 2.60
+  #define  DEFAULT_Kd 79.44
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
