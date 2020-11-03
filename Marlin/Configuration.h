@@ -500,9 +500,9 @@
   //#define  DEFAULT_Kd 55.47
 
   // My Ender 3 Pro
-  #define  DEFAULT_Kp 28.73
-  #define  DEFAULT_Ki 2.60
-  #define  DEFAULT_Kd 79.44
+  #define  DEFAULT_Kp 24.57
+  #define  DEFAULT_Ki 1.96
+  #define  DEFAULT_Kd 76.82
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -765,7 +765,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80.7, 402.2, 150 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80.7, 402.2, 153.6 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1021,7 +1021,7 @@
  * Specify a Probe position as { X, Y, Z }
  */
 //  https://www.thingiverse.com/thing:3003725
-#define NOZZLE_TO_PROBE_OFFSET { -41, -10, -1.95 }
+#define NOZZLE_TO_PROBE_OFFSET { -41, -10, -0.75 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
